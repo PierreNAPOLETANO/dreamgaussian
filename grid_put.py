@@ -282,19 +282,10 @@ def grid_put(shape, coords, values, mode='linear-mipmap', min_resolution=32, ret
     assert D in [2, 3], f'only support D == 2 or 3, but got D == {D}'
 
     if mode == 'nearest':
-        if D == 2:
-            return nearest_grid_put_2d(*shape, coords, values, return_raw)
-        else:
-            return nearest_grid_put_3d(*shape, coords, values, return_raw)
+        return nearest_grid_put_2d(*shape, coords, values, return_raw) if D == 2 else nearest_grid_put_3d(*shape, coords, values, return_raw)
     elif mode == 'linear':
-        if D == 2:
-            return linear_grid_put_2d(*shape, coords, values, return_raw)
-        else:
-            return linear_grid_put_3d(*shape, coords, values, return_raw)
+        return linear_grid_put_2d(*shape, coords, values, return_raw) if D == 2 else linear_grid_put_3d(*shape, coords, values, return_raw)
     elif mode == 'linear-mipmap':
-        if D == 2:
-            return mipmap_linear_grid_put_2d(*shape, coords, values, min_resolution, return_raw)
-        else:
-            return mipmap_linear_grid_put_3d(*shape, coords, values, min_resolution, return_raw)
+        return mipmap_linear_grid_put_2d(*shape, coords, values, min_resolution, return_raw) if D == 2 else mipmap_linear_grid_put_3d(*shape, coords, values, min_resolution, return_raw)
     else:
         raise NotImplementedError(f"got mode {mode}")    
